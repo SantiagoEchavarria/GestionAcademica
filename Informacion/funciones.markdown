@@ -2,7 +2,7 @@
 
 ## 👩‍💼 Administrador
 
-- [1 ] Registrar, editar y eliminar **docentes**
+- [*] Registrar, editar y eliminar **docentes**
 - [1 ] Registrar, editar y eliminar **alumnos**
 - [1 ] Crear, editar y eliminar **grupos**
 - [1 ] Crear y asignar **materias** a docentes

@@ -1,4 +1,6 @@
 package com.example.GestionAcademica.controllers;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,15 +51,20 @@ public class DocenteController {
     @GetMapping("/docente/lista")
     public String listaDocentes(Model model) {
         model.addAttribute("docentes", docenteServicio.obtenerTodosLosDocentes());
+
+        List<Docente> lista = docenteServicio.obtenerTodosLosDocentes();
+        System.out.println("Cantidad de docentes: " + lista.size());
         return "docente/lista-docentes"; 
     }
 
     @GetMapping("/docente/editar/{id}")
     public String editarDocente(@PathVariable int id, Model model) {
         Docente docente = docenteServicio.obtenerDocentePorId(id);
+        System.out.println("Se mapeo el docente con ID: " + id);
+
         if (docente != null) {
             model.addAttribute("docente", docente);
-            return "docente/editar-docente"; 
+            return "docente/nuevo-docente"; 
         } else {
             model.addAttribute("error", "Docente no encontrado.");
             return "redirect:/docente/lista"; 

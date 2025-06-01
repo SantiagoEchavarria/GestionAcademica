@@ -2,9 +2,11 @@ package com.example.GestionAcademica.service.comportamiento;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.GestionAcademica.modelos.Comportamiento;
 import com.example.GestionAcademica.repository.ComportamientoDAO;
-
+@Service
 public class ComportamientoServicio implements ComportamientoInterface {
    private final ComportamientoDAO comportamientoDAO;
 

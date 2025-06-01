@@ -1,8 +1,8 @@
 package com.example.GestionAcademica.controllers;
 
 import com.example.GestionAcademica.modelos.Calificacion;
-import com.example.GestionAcademica.service.calificacion.CalificacionInterface;
 import com.example.GestionAcademica.service.Alumno.AlumnoInterface;
+import com.example.GestionAcademica.service.calificacion.CalificacionInterface;
 import com.example.GestionAcademica.service.grupo.GrupoInterface;
 
 import jakarta.validation.Valid;

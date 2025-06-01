@@ -3,7 +3,6 @@ package com.example.GestionAcademica.controllers;
 import com.example.GestionAcademica.modelos.Asistencia;
 import com.example.GestionAcademica.service.Asistencia.AsistenciaInterface;
 import com.example.GestionAcademica.service.Alumno.AlumnoInterface;
-import com.example.GestionAcademica.service.grupo.GrupoInterface;
 
 import jakarta.validation.Valid;
 
@@ -23,12 +22,10 @@ public class AsistenciaController {
 
     private final AsistenciaInterface asistenciaServicio;
     private final AlumnoInterface alumnoServicio;
-    private final GrupoInterface grupoServicio;
 
-    public AsistenciaController(AsistenciaInterface asistenciaServicio, AlumnoInterface alumnoServicio, GrupoInterface grupoServicio) {
+    public AsistenciaController(AsistenciaInterface asistenciaServicio, AlumnoInterface alumnoServicio) {
         this.asistenciaServicio = asistenciaServicio;
         this.alumnoServicio = alumnoServicio;
-        this.grupoServicio = grupoServicio;
     }
 
     // Mostrar formulario para nueva asistencia
@@ -36,7 +33,6 @@ public class AsistenciaController {
     public String nuevaAsistencia(Model model) {
         model.addAttribute("asistencia", new Asistencia());
         model.addAttribute("alumnos", alumnoServicio.obtenerTodosLosAlumnos());
-        model.addAttribute("grupos", grupoServicio.obtenerTodosLosGrupos());
         return "asistencia/nueva-asistencia";
     }
 
@@ -46,7 +42,6 @@ public class AsistenciaController {
                                     Model model, RedirectAttributes flash, SessionStatus status) {
         if (errors.hasErrors()) {
             model.addAttribute("alumnos", alumnoServicio.obtenerTodosLosAlumnos());
-            model.addAttribute("grupos", grupoServicio.obtenerTodosLosGrupos());
             model.addAttribute("errors", "Corrige los errores en el formulario.");
             return "asistencia/nueva-asistencia";
         }
@@ -90,7 +85,6 @@ public class AsistenciaController {
         if (asistencia != null) {
             model.addAttribute("asistencia", asistencia);
             model.addAttribute("alumnos", alumnoServicio.obtenerTodosLosAlumnos());
-            model.addAttribute("grupos", grupoServicio.obtenerTodosLosGrupos());
             return "asistencia/editar-asistencia";
         }
         return "redirect:/asistencia/lista";

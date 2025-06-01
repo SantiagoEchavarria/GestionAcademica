@@ -2,9 +2,12 @@ package com.example.GestionAcademica.service.calificacion;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.GestionAcademica.modelos.Calificacion;
 import com.example.GestionAcademica.repository.CalificacionDAO;
 
+@Service
 public class CalificacionServicio implements CalificacionInterface {
     private final CalificacionDAO calificacionDAO;
 

@@ -2,9 +2,11 @@ package com.example.GestionAcademica.service.grupo;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.GestionAcademica.modelos.Grupo;
 import com.example.GestionAcademica.repository.GrupoDAO;
-
+@Service
 public class GrupoServicio implements GrupoInterface {
     
     private final GrupoDAO grupoDAO;

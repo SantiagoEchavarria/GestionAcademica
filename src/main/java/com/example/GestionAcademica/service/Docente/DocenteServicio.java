@@ -2,9 +2,11 @@ package com.example.GestionAcademica.service.Docente;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.GestionAcademica.modelos.Docente;
 import com.example.GestionAcademica.repository.DocenteDAO;
-
+@Service
 public class DocenteServicio implements DocenteInterface {
 
     private final DocenteDAO docenteDAO;

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Docentes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Listado de Docentes</h2>
+
+    <!-- Mensaje de éxito -->
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+    <a th:href="@{/docente/nuevo}" class="btn btn-primary mb-3">Nuevo Docente</a>
+
+    <div th:if="${#lists.isEmpty(docentes)}" class="alert alert-warning">
+        No hay docentes registrados.
+    </div>
+
+    <table class="table table-bordered" th:if="${!#lists.isEmpty(docentes)}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Acciones</th> <!-- Nueva columna -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="docente : ${docentes}">
+                <td th:text="${docente.id}">1</td>
+                <td th:text="${docente.nombre}">Nombre</td>
+                <td th:text="${docente.apellido}">Apellido</td>
+                <td th:text="${docente.email}">Email</td>
+                <td>
+                    <!-- Botón Editar -->
+                    <a th:href="@{|/docente/editar/${docente.id}|}" class="btn btn-sm btn-warning" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+
+                    <!-- Botón Eliminar -->
+                    <a th:href="@{|/docente/eliminar/${docente.id}|}" 
+                       class="btn btn-sm btn-danger" 
+                       title="Eliminar"
+                       onclick="return confirm('¿Estás seguro de eliminar este docente?');">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

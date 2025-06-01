@@ -2,9 +2,11 @@ package com.example.GestionAcademica.service.Materia;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.GestionAcademica.modelos.Materia;
 import com.example.GestionAcademica.repository.MateriaDAO;
-
+@Service
 public class MateriaServicio implements MateriaInterface {
 
     private final MateriaDAO materiaDAO;

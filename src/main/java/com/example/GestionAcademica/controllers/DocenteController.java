@@ -1,0 +1,80 @@
+package com.example.GestionAcademica.controllers;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+
+import com.example.GestionAcademica.modelos.Docente;
+import com.example.GestionAcademica.service.Docente.DocenteInterface;
+
+import jakarta.validation.Valid;
+
+
+@Controller
+@SessionAttributes("docente")
+public class DocenteController {
+    private final DocenteInterface docenteServicio;
+    public DocenteController(DocenteInterface docenteServicio) {
+        this.docenteServicio = docenteServicio;
+    }
+
+    @GetMapping("/docente/nuevo")	
+    public String nuevoDocente(Model model) {
+       Docente docente = new Docente();
+       model.addAttribute("docente", docente);
+       return "docente/nuevo-docente"; 
+    }
+
+    @PostMapping("/docente/guardar")
+    public String guardarDocente(@Valid @ModelAttribute Docente docente, BindingResult errors,
+             Model model, SessionStatus status, RedirectAttributes flash) {
+
+        if (docente.getNombre() == null || docente.getNombre().isEmpty()) {
+            model.addAttribute("error", "El nombre del docente es obligatorio.");
+            return "docente/nuevo-docente"; // Redirige de nuevo al formulario
+        }
+        docenteServicio.guardarDocente(docente);
+        status.setComplete(); 
+        model.addAttribute("success", "El docente ha sido guardado exitosamente.");
+        return "redirect:/docente/lista"; 
+       
+    }
+
+    @GetMapping("/docente/lista")
+    public String listaDocentes(Model model) {
+        model.addAttribute("docentes", docenteServicio.obtenerTodosLosDocentes());
+        return "docente/lista-docentes"; 
+    }
+
+    @GetMapping("/docente/editar/{id}")
+    public String editarDocente(@PathVariable int id, Model model) {
+        Docente docente = docenteServicio.obtenerDocentePorId(id);
+        if (docente != null) {
+            model.addAttribute("docente", docente);
+            return "docente/editar-docente"; 
+        } else {
+            model.addAttribute("error", "Docente no encontrado.");
+            return "redirect:/docente/lista"; 
+        }
+    }
+
+    @GetMapping("/docente/eliminar/{id}")
+    public String eliminarDocente(@PathVariable int id, RedirectAttributes flash) {
+        Docente docente = docenteServicio.obtenerDocentePorId(id);
+        if (docente != null) {
+            docenteServicio.eliminarDocente(id);
+            flash.addFlashAttribute("success", "El docente ha sido eliminado exitosamente.");
+        } else {
+            flash.addFlashAttribute("error", "Docente no encontrado.");
+        }
+        return "redirect:/docente/lista"; 
+    }
+
+
+}

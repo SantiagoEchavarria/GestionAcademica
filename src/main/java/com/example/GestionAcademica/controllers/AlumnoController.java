@@ -63,17 +63,23 @@ public class AlumnoController {
         Alumno alumno = alumnoServicio.obtenerAlumnoPorId(id);
         if (alumno != null) {
             model.addAttribute("alumno", alumno);
+            return "alumno/editar-alumno";
         } else {
             return "redirect:/alumno/lista"; 
         }
-        return "alumno/editar-alumno";
     }
     
     //Eliminar alumno
     @GetMapping("/alumno/eliminar/{id}")
-    public String eliminarAlumno(@PathVariable int id, Model model) {
-        alumnoServicio.eliminarAlumno(id);
-        return "alumno/eliminar-alumno";
+    public String eliminarAlumno(@PathVariable int id, Model model, RedirectAttributes flash) {
+        Alumno alumno = alumnoServicio.obtenerAlumnoPorId(id);
+        if (alumno != null) {
+            alumnoServicio.eliminarAlumno(id);
+            flash.addFlashAttribute("success", "El alumno ha sido eliminado exitosamente.");
+        } else {
+            flash.addFlashAttribute("error", "El alumno no fue encontrado.");
+        }
+        return "redirect:/alumno/lista";
     }
 
     //Buscar alumno

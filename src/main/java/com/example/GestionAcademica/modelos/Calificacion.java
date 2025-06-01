@@ -11,10 +11,6 @@ public class Calificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "La materia no puede estar vacía")
-    @Column(name = "materia", nullable = false, length = 100)
-    private String materia;
-
     @NotNull(message = "La nota no puede ser nula")
     @DecimalMin(value = "0.0", inclusive = true, message = "La nota no puede ser menor que 0")
     @DecimalMax(value = "5.0", inclusive = true, message = "La nota no puede ser mayor que 5")
@@ -30,20 +26,21 @@ public class Calificacion {
     private Alumno alumno;
 
     @ManyToOne
-    @JoinColumn(name = "grupo_id", nullable = false)
-    private Grupo grupo;
+    @JoinColumn(name = "materia_id", nullable = false)
+    private Materia materia;
+
 
     // Constructor vacío requerido por JPA
     public Calificacion() {
     }
 
     // Constructor con argumentos
-    public Calificacion(String materia, float nota, String periodo, Alumno alumno, Grupo grupo) {
+    public Calificacion(Materia materia, float nota, String periodo, Alumno alumno) {
         this.materia = materia;
         this.nota = nota;
         this.periodo = periodo;
         this.alumno = alumno;
-        this.grupo = grupo;
+       
     }
 
     // Getters y Setters
@@ -54,14 +51,6 @@ public class Calificacion {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getMateria() {
-        return materia;
-    }
-
-    public void setMateria(String materia) {
-        this.materia = materia;
     }
 
     public float getNota() {
@@ -87,13 +76,11 @@ public class Calificacion {
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
-
-    public Grupo getGrupo() {
-        return grupo;
+    public Materia getMateria() {
+        return materia;
     }
-
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 }
 

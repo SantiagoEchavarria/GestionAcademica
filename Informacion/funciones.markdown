@@ -2,9 +2,9 @@
 
 ## 👩‍💼 Administrador
 
-- [ ] Registrar, editar y eliminar **docentes**
-- [ ] Registrar, editar y eliminar **alumnos**
-- [ ] Crear, editar y eliminar **grupos**
+- [1 ] Registrar, editar y eliminar **docentes**
+- [1 ] Registrar, editar y eliminar **alumnos**
+- [1 ] Crear, editar y eliminar **grupos**
 - [ ] Crear y asignar **materias** a docentes
 - [ ] Asignar **alumnos a grupos**
 - [ ] Ver informes generales de:

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.GestionAcademica.modelos.Alumno;
 import com.example.GestionAcademica.service.Alumno.AlumnoInterface;
+import com.example.GestionAcademica.service.grupo.GrupoInterface;
 
 import jakarta.validation.Valid;
 
@@ -23,8 +24,9 @@ import jakarta.validation.Valid;
 public class AlumnoController {
 
     private final AlumnoInterface alumnoServicio;
-
-    public AlumnoController(AlumnoInterface alumnoInterface) {
+    private final GrupoInterface grupoServicio;
+    public AlumnoController(AlumnoInterface alumnoInterface, GrupoInterface grupoInterface) {
+        this.grupoServicio = grupoInterface;
         this.alumnoServicio = alumnoInterface;
     }
 
@@ -33,22 +35,25 @@ public class AlumnoController {
     public String nuevoAlumno(Model model) {
         Alumno alumno = new Alumno();
         model.addAttribute("alumno", alumno);
+        model.addAttribute("grupos", grupoServicio.obtenerTodosLosGrupos());
         return "alumno/nuevo-alumno";
     }
-    
-    @PostMapping("/alumno/guardar")
+  @PostMapping("/alumno/guardar")
     public String guardarAlumno(@Valid @ModelAttribute Alumno alumno, BindingResult errors,
-             Model model, SessionStatus status, RedirectAttributes flash) {
+                               Model model, SessionStatus status, RedirectAttributes flash) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("errors", "Por favor, corrige los errores en el formulario.");
-            return "redirect:/alumno/nuevo"; 
+            model.addAttribute("grupos", grupoServicio.obtenerTodosLosGrupos());
+            flash.addFlashAttribute("mensajeError", "Por favor, corrige los errores en el formulario.");
+            return "alumno/nuevo-alumno"; 
         }
+
         alumnoServicio.guardarAlumno(alumno);
-        status.setComplete(); 
+        status.setComplete();
         flash.addFlashAttribute("success", "El alumno ha sido guardado exitosamente.");
-        return "redirect:/alumno/lista"; 
+        return "redirect:/alumno/lista";
     }
+
 
     //Lista de alumnos
     @GetMapping("/alumno/lista")
@@ -63,7 +68,8 @@ public class AlumnoController {
         Alumno alumno = alumnoServicio.obtenerAlumnoPorId(id);
         if (alumno != null) {
             model.addAttribute("alumno", alumno);
-            return "alumno/editar-alumno";
+            model.addAttribute("grupos", grupoServicio.obtenerTodosLosGrupos());
+            return "alumno/nuevo-alumno";
         } else {
             return "redirect:/alumno/lista"; 
         }

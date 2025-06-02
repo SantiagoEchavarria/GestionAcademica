@@ -76,7 +76,7 @@ public class GrupoController {
         Grupo grupo = grupoServicio.obtenerGrupoPorId(id);
         if (grupo != null) {
             model.addAttribute("grupo", grupo);
-            return "grupo/editar-grupo";
+            return "grupo/nuevo-grupo";
         }
         return "redirect:/grupo/lista";
     }

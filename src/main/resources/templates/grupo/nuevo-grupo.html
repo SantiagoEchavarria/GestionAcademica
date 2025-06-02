@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${grupo.id == 0} ? 'Registrar Nuevo Grupo' : 'Editar Grupo'">Grupo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 th:text="${grupo.id == 0} ? 'Registrar Nuevo Grupo' : 'Editar Grupo'">Registrar Nuevo Grupo</h2>
+
+    <form th:action="@{/grupo/guardar}" th:object="${grupo}" method="post" class="needs-validation" novalidate>
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del Grupo</label>
+            <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="grado" class="form-label">Grado</label>
+            <input type="text" id="grado" th:field="*{grado}" class="form-control" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('grado')}" th:errors="*{grado}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="año" class="form-label">Año</label>
+            <input type="number" id="año" th:field="*{año}" class="form-control" min="2000" max="2100" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('año')}" th:errors="*{año}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/grupo/lista}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

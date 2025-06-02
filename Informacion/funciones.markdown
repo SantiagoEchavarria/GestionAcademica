@@ -5,8 +5,8 @@
 - [*] Registrar, editar y eliminar **docentes**
 - [*] Registrar, editar y eliminar **alumnos**
 - [*] Crear, editar y eliminar **grupos**
-- [1 ] Crear y asignar **materias** a docentes
-- [1 ] Asignar **alumnos a grupos**
+- [*] Crear y asignar **materias** a docentes
+- [1] Asignar **alumnos a grupos**
 - [ ] Ver informes generales de:
   - [ ] Asistencia
   - [ ] Comportamiento

@@ -15,24 +15,25 @@ public class Comportamiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "La fecha no puede ser nula")
-    @PastOrPresent(message = "La fecha debe ser pasada o actual")
+    @NotNull(message = "{comportamiento.fecha.notnull}")
+    @PastOrPresent(message = "{comportamiento.fecha.pastorpresent}")
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha", nullable = false)
     private Date fecha;
 
-    @NotBlank(message = "La descripción no puede estar vacía")
+    @NotBlank(message = "{comportamiento.descripcion.notblank}")
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
 
-    @NotBlank(message = "El tipo de comportamiento no puede estar vacío")
+    @NotBlank(message = "{comportamiento.tipo.notblank}")
     @Column(name = "tipo", nullable = false, length = 10)
     private String tipo;
 
     @ManyToOne
     @JoinColumn(name = "alumno_id", nullable = false)
+    @NotNull(message = "{comportamiento.alumno.notnull}")
     private Alumno alumno;
-
+    
     // Constructor vacío requerido por JPA
     public Comportamiento() {
     }

@@ -13,33 +13,33 @@ public class Alumno {
     private int id;
 
     @NotBlank(message = "El nombre no puede estar vacío")
-    @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre solo puede contener letras y espacios")
-    @Column(name = "nombre", nullable = false, length = 50, unique = true)
+    @Size(min = 2, max = 50, message = "{nombre.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{nombre.pattern}")
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
     @NotBlank(message = "El apellido no puede estar vacío")
-    @Size(min = 2, max = 50, message = "El apellido debe tener entre 2 y 50 caracteres")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "El apellido solo puede contener letras y espacios")
-    @Column(name = "apellido", nullable = false, length = 50, unique = true)
+    @Size(min = 2, max = 50, message = "{apellido.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{apellido.pattern}")
+    @Column(name = "apellido", nullable = false, length = 50)
     private String apellido;
 
-    @NotNull(message = "La fecha de nacimiento no puede ser nula")
-    @Past(message = "La fecha de nacimiento debe ser en el pasado")
+    @NotNull(message = "{fechaNacimiento.notnull}")
+    @Past(message = "{fechanacimiento.past}")
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_nacimiento", nullable = false)
     private Date fechaNacimiento;
 
-    @NotBlank(message = "La dirección no puede estar vacía")
-    @Size(max = 100, message = "La dirección no puede tener más de 100 caracteres")
-    @Pattern(regexp = "^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ ,.-]+$", message = "La dirección solo puede contener letras, números y algunos caracteres especiales")
-    @Column(name = "direccion", nullable = false, length = 100, unique = true)
+    @NotBlank(message = "{direccion.notblank}")
+    @Size(max = 100, message = "{direccion.size}")
+    @Pattern(regexp = "^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ ,.-]+$", message = "{direccion.pattern}")
+    @Column(name = "direccion", nullable = false, length = 100)
     private String direccion;
 
-    @NotBlank(message = "El email no puede estar vacío")
-    @Email(message = "El formato del email no es válido")
-    @Size(max = 100, message = "El email no puede tener más de 100 caracteres")
-    @Column(name = "email", nullable = false, length = 100, unique = true)
+    @NotBlank(message = "{email.notblank}")
+    @Email(message = "{email.email}")
+    @Size(max = 100, message = "{email.size}")
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
 
     @ManyToOne

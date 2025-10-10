@@ -10,13 +10,16 @@ import jakarta.validation.constraints.Size;
 public class Logro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
+    @NotBlank(message = "{logro.descripcion.notblank}")
+    @Size(max = 255, message = "{logro.descripcion.size}")
+    @Pattern(
+        regexp = "^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ ,.-]+$",
+        message = "{logro.descripcion.pattern}"
+    )
     @Column(name = "descripcion", nullable = false, length = 255)
-    @NotBlank(message = "La descripción no puede estar vacía")
-    @Size(max = 255, message = "La descripción no puede tener más de 255 caracteres")
-    @Pattern(regexp = "^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ ,.-]+$", message = "La descripción solo puede contener letras, números y algunos caracteres especiales")
-    String descripcion;
+    private String descripcion;
 
     public Logro() {
     }

@@ -13,8 +13,8 @@ public class Asistencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "La fecha no puede ser nula")
-    @PastOrPresent(message = "La fecha no puede ser futura")
+    @NotNull(message = "{asistencia.fecha.notnull}")
+    @PastOrPresent(message = "{asistencia.fecha.pastorpresent}")
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha", nullable = false)
     private Date fecha;

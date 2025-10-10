@@ -9,28 +9,27 @@ import java.util.List;
 @Entity
 @Table(name = "grupos")
 public class Grupo {
-
-    @Id
+ @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "El nombre del grupo no puede estar vacío")
-    @Size(max = 50, message = "El nombre del grupo no puede tener más de 50 caracteres")
+    @NotBlank(message = "{grupo.nombre.notblank}")
+    @Size(max = 50, message = "{grupo.nombre.size}")
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
-    @NotBlank(message = "El grado no puede estar vacío")
-    @Size(max = 20, message = "El grado no puede tener más de 20 caracteres")
+    @NotBlank(message = "{grupo.grado.notblank}")
+    @Size(max = 20, message = "{grupo.grado.size}")
     @Column(name = "grado", nullable = false, length = 20)
     private String grado;
 
-    @NotNull(message = "El año no puede ser nulo")
+    @NotNull(message = "{grupo.año.notnull}")
     @Column(name = "año", nullable = false)
     private int año;
 
     @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alumno> alumnos;
-
+    
     // Constructor vacío requerido por JPA
     public Grupo() {
     }

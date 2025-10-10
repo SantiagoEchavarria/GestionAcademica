@@ -7,25 +7,25 @@ import jakarta.validation.constraints.*;
 @Table(name = "docentes")
 public class Docente {
 
-    @Id
+      @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "El nombre no puede estar vacío")
-    @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre solo puede contener letras y espacios")
+    @NotBlank(message = "{docente.nombre.notblank}")
+    @Size(min = 2, max = 50, message = "{docente.nombre.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{docente.nombre.pattern}")
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
-    @NotBlank(message = "El apellido no puede estar vacío")
-    @Size(min = 2, max = 50, message = "El apellido debe tener entre 2 y 50 caracteres")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "El apellido solo puede contener letras y espacios")
+    @NotBlank(message = "{docente.apellido.notblank}")
+    @Size(min = 2, max = 50, message = "{docente.apellido.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{docente.apellido.pattern}")
     @Column(name = "apellido", nullable = false, length = 50)
     private String apellido;
 
-    @NotBlank(message = "El email no puede estar vacío")
-    @Email(message = "Debe ser un correo electrónico válido")
-    @Size(max = 100, message = "El email no debe superar los 100 caracteres")
+    @NotBlank(message = "{docente.email.notblank}")
+    @Email(message = "{docente.email.email}")
+    @Size(max = 100, message = "{docente.email.size}")
     @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 

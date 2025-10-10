@@ -11,9 +11,9 @@ public class Calificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "La nota no puede ser nula")
-    @DecimalMin(value = "0.0", inclusive = true, message = "La nota no puede ser menor que 0")
-    @DecimalMax(value = "5.0", inclusive = true, message = "La nota no puede ser mayor que 5")
+    @NotNull(message = "{calificacion.nota.notnull}")
+    @DecimalMin(value = "0.0", inclusive = true, message = "{calificacion.nota.decimalmin}")
+    @DecimalMax(value = "5.0", inclusive = true, message = "{calificacion.nota.decimalmax}")
     @Column(name = "nota", nullable = false)
     private float nota;
 
@@ -23,10 +23,12 @@ public class Calificacion {
 
     @ManyToOne
     @JoinColumn(name = "alumno_id", nullable = false)
+    @NotNull(message = "{calificacion.alumno.notnull}")
     private Alumno alumno;
 
     @ManyToOne
     @JoinColumn(name = "materia_id", nullable = false)
+    @NotNull(message = "{calificacion.materia.notnull}")
     private Materia materia;
 
 

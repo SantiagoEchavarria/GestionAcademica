@@ -11,20 +11,21 @@ public class Materia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "El nombre no puede estar vacío")
-    @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre solo puede contener letras y espacios")
+    @NotBlank(message = "{materia.nombre.notblank}")
+    @Size(min = 2, max = 50, message = "{materia.nombre.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{materia.nombre.pattern}")
     @Column(name = "nombre", nullable = false, length = 50, unique = true)
     private String nombre;
 
-    @NotBlank(message = "El área no puede estar vacía")
-    @Size(min = 2, max = 50, message = "El área debe tener entre 2 y 50 caracteres")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "El área solo puede contener letras y espacios")
+    @NotBlank(message = "{materia.area.notblank}")
+    @Size(min = 2, max = 50, message = "{materia.area.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{materia.area.pattern}")
     @Column(name = "area", nullable = false, length = 50)
     private String area;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "docente_id", nullable = false)
+    @NotNull(message = "{materia.docente.notnull}")
     private Docente docente;
 
     // Constructor vacío (obligatorio para JPA)

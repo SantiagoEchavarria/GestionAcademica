@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,20 +21,21 @@ import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("docente")
+@RequestMapping("/docente")
 public class DocenteController {
     private final DocenteInterface docenteServicio;
     public DocenteController(DocenteInterface docenteServicio) {
         this.docenteServicio = docenteServicio;
     }
 
-    @GetMapping("/docente/nuevo")	
+    @GetMapping("/nuevo")	
     public String nuevoDocente(Model model) {
        Docente docente = new Docente();
        model.addAttribute("docente", docente);
        return "docente/nuevo-docente"; 
     }
 
-    @PostMapping("/docente/guardar")
+    @PostMapping("/guardar")
     public String guardarDocente(@Valid @ModelAttribute Docente docente, BindingResult errors,
              Model model, SessionStatus status, RedirectAttributes flash) {
 
@@ -48,7 +50,7 @@ public class DocenteController {
        
     }
 
-    @GetMapping("/docente/lista")
+    @GetMapping("/lista")
     public String listaDocentes(Model model) {
         model.addAttribute("docentes", docenteServicio.obtenerTodosLosDocentes());
 
@@ -57,7 +59,7 @@ public class DocenteController {
         return "docente/lista-docentes"; 
     }
 
-    @GetMapping("/docente/editar/{id}")
+    @GetMapping("/editar/{id}")
     public String editarDocente(@PathVariable int id, Model model) {
         Docente docente = docenteServicio.obtenerDocentePorId(id);
         System.out.println("Se mapeo el docente con ID: " + id);
@@ -71,7 +73,7 @@ public class DocenteController {
         }
     }
 
-    @GetMapping("/docente/eliminar/{id}")
+    @GetMapping("/eliminar/{id}")
     public String eliminarDocente(@PathVariable int id, RedirectAttributes flash) {
         Docente docente = docenteServicio.obtenerDocentePorId(id);
         if (docente != null) {

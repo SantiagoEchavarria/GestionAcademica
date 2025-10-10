@@ -13,37 +13,38 @@ public class Alumno {
     private int id;
 
     @NotBlank(message = "El nombre no puede estar vacío")
-    @Size(min = 2, max = 50, message = "{nombre.size}")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{nombre.pattern}")
+    @Size(min = 2, max = 50, message = "{alumno.nombre.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{alumno.nombre.pattern}")
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
     @NotBlank(message = "El apellido no puede estar vacío")
-    @Size(min = 2, max = 50, message = "{apellido.size}")
-    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{apellido.pattern}")
+    @Size(min = 2, max = 50, message = "{alumno.apellido.size}")
+    @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{alumno.apellido.pattern}")
     @Column(name = "apellido", nullable = false, length = 50)
     private String apellido;
 
-    @NotNull(message = "{fechaNacimiento.notnull}")
-    @Past(message = "{fechanacimiento.past}")
+    @NotNull(message = "{alumno.fechaNacimiento.notnull}")
+    @Past(message = "{alumno.fechanacimiento.past}")
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_nacimiento", nullable = false)
     private Date fechaNacimiento;
 
-    @NotBlank(message = "{direccion.notblank}")
-    @Size(max = 100, message = "{direccion.size}")
-    @Pattern(regexp = "^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ ,.-]+$", message = "{direccion.pattern}")
+    @NotBlank(message = "{alumno.direccion.notblank}")
+    @Size(max = 100, message = "{alumno.direccion.size}")
+    @Pattern(regexp = "^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ ,.-]+$", message = "{alumno.direccion.pattern}")
     @Column(name = "direccion", nullable = false, length = 100)
     private String direccion;
 
-    @NotBlank(message = "{email.notblank}")
-    @Email(message = "{email.email}")
-    @Size(max = 100, message = "{email.size}")
+    @NotBlank(message = "{alumno.email.notblank}")
+    @Email(message = "{alumno.email.email}")
+    @Size(max = 100, message = "{alumno.email.size}")
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
     @ManyToOne
     @JoinColumn(name = "grupo_id", nullable = false)
+    @NotNull(message = "{alumno.grupo.notnull}")
     private Grupo grupo;
 
     @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)

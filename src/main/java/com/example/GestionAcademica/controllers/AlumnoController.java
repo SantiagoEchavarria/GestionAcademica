@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,6 +22,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("alumno")
+@RequestMapping("/alumno")
 public class AlumnoController {
 
     private final AlumnoInterface alumnoServicio;
@@ -31,14 +33,14 @@ public class AlumnoController {
     }
 
     //Nuevo alumno
-    @GetMapping("/alumno/nuevo")
+    @GetMapping("/nuevo")
     public String nuevoAlumno(Model model) {
         Alumno alumno = new Alumno();
         model.addAttribute("alumno", alumno);
         model.addAttribute("grupos", grupoServicio.obtenerTodosLosGrupos());
         return "alumno/nuevo-alumno";
     }
-  @PostMapping("/alumno/guardar")
+  @PostMapping("/guardar")
     public String guardarAlumno(@Valid @ModelAttribute Alumno alumno, BindingResult errors,
                                Model model, SessionStatus status, RedirectAttributes flash) {
 
@@ -56,14 +58,14 @@ public class AlumnoController {
 
 
     //Lista de alumnos
-    @GetMapping("/alumno/lista")
+    @GetMapping("/lista")
     public String listaAlumnos(Model model) {
         List<Alumno> alumnos = alumnoServicio.obtenerTodosLosAlumnos();
         model.addAttribute("alumnos", alumnos);
         return "alumno/lista-alumnos";
     }
     //Editar alumno
-    @GetMapping("/alumno/editar/{id}")
+    @GetMapping("/editar/{id}")
     public String editarAlumno(@PathVariable int id, Model model) {
         Alumno alumno = alumnoServicio.obtenerAlumnoPorId(id);
         if (alumno != null) {
@@ -76,7 +78,7 @@ public class AlumnoController {
     }
     
     //Eliminar alumno
-    @GetMapping("/alumno/eliminar/{id}")
+    @GetMapping("/eliminar/{id}")
     public String eliminarAlumno(@PathVariable int id, Model model, RedirectAttributes flash) {
         Alumno alumno = alumnoServicio.obtenerAlumnoPorId(id);
         if (alumno != null) {
@@ -89,7 +91,7 @@ public class AlumnoController {
     }
 
     //Buscar alumno
-    @GetMapping("/alumno/consultar/{id}")   
+    @GetMapping("/consultar/{id}")   
     public String consultarAlumno(@PathVariable int id, Model model) {
         Alumno alumno = alumnoServicio.obtenerAlumnoPorId(id);
         if (alumno != null) {

@@ -10,11 +10,9 @@
 <body>
 <div th:replace="plantillas/navbar :: navbar "> </div>
 <div th:replace="plantillas/mensajes :: mensajes"></div>
+
 <div class="container mt-5">
     <h2>Listado de Docentes</h2>
-
-    <!-- Mensaje de éxito -->
-    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
 
     <a th:href="@{/docente/nuevo}" class="btn btn-primary mb-3">Nuevo Docente</a>
 
@@ -29,6 +27,7 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Email</th>
+                <th>Materia</th>
                 <th>Acciones</th> 
             </tr>
         </thead>
@@ -38,6 +37,12 @@
                 <td th:text="${docente.nombre}">Nombre</td>
                 <td th:text="${docente.apellido}">Apellido</td>
                 <td th:text="${docente.email}">Email</td>
+                <td>
+                    <span th:each="relacion, stat : ${docente.docenteMateria}"
+                        th:text="${relacion.materia.nombre} + ${stat.last ? '' : ', '}"></span>
+                </td>
+
+
                 <td>
                     <!-- Botón Editar -->
                     <a th:href="@{|/docente/editar/${docente.id}|}" class="btn btn-sm btn-warning" title="Editar">

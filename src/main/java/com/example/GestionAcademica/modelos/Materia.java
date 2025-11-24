@@ -9,7 +9,7 @@ public class Materia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotBlank(message = "{materia.nombre.notblank}")
     @Size(min = 2, max = 50, message = "{materia.nombre.size}")
@@ -39,11 +39,11 @@ public class Materia {
     }
 
     // Getters y Setters
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

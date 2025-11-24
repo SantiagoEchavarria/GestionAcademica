@@ -3,13 +3,14 @@
 ## 👩‍💼 Administrador
 
 - [*] Registrar, editar y eliminar **docentes**
+- [ ] Asignar materias a cada docente 
 - [*] Registrar, editar y eliminar **alumnos**
 - [*] Crear, editar y eliminar **grupos**
 - [*] Crear y asignar **materias** a docentes
 - [1] Asignar **alumnos a grupos**
 - [ ] Ver informes generales de:
-  - [ ] Asistencia
-  - [ ] Comportamiento
+  - [ ] Asistencia por grupo
+  - [ ] Comportamiento 
   - [ ] Calificaciones
 
 ## 👨‍🏫 Docente

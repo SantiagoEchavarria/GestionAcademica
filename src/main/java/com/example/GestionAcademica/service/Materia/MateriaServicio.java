@@ -20,11 +20,7 @@ public class MateriaServicio implements MateriaInterface {
         return materiaDAO.findAll();
     }
 
-    @Override
-    public Materia obtenerMateriaPorId(int id) {
-     
-        return materiaDAO.findById(id).orElse(null);
-    }
+  
 
     @Override
     public void guardarMateria(Materia materia) {
@@ -44,5 +40,11 @@ public class MateriaServicio implements MateriaInterface {
     public void eliminarMateria(int id) {
         materiaDAO.deleteById(id);
     }
+
+    @Override
+    public Materia obtenerMateriaPorId(int materiaId) {
+        return materiaDAO.findById(materiaId).orElse(null);
+    }
+
 
 }

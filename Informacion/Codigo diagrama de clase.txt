@@ -1,63 +1,67 @@
 @startuml
 class Alumno {
-  int id
-  String nombre
-  String apellido
-  Date fechaNacimiento
-  String direccion
-  String email
+  int id
+  String nombre
+  String apellido
+  Date fechaNacimiento
+  String direccion
+  String email
 }
 
 class Grupo {
-  int id
-  String nombre
-  String grado
-  int año
+  int id
+  String nombre
+  String grado
+  int año
 }
 
 class Asistencia {
-  int id
-  Date fecha
-  boolean presente
-  Alumno alumno
+  int id
+  Date fecha
+  boolean presente
+  Alumno alumno
 }
 
-
-
 class Comportamiento {
-  int id
-  Date fecha
-  String descripcion
-  String tipo
-  Alumno alumno
-
+  int id
+  Date fecha
+  String descripcion
+  String tipo
+  Alumno alumno
 }
 
 class Calificacion {
-  int id
-  float nota
-  String periodo
-  Alumno alumno
-  Materia materia
+  int id
+  float nota
+  String periodo
+  Alumno alumno
+  Materia materia
 }
 
 class Logro {
-  int id
-  String descripcion
+  int id
+  String descripcion
 }
 
 class Materia {
-  int id
-  String nombre
-  String area
-  Docente docente
+  int id
+  String nombre
+  String area
 }
 
 class Docente {
-  int id
-  String nombre
-  String apellido
-  String email
+  int id
+  String nombre
+  String apellido
+  String email
+}
+
+class DocenteMateria {
+  int id
+  Date fechaInicio
+  Date fechaFin
+  Docente docente
+  Materia materia
 }
 
 Grupo "1" -- "0..*" Alumno : alumnos
@@ -65,6 +69,8 @@ Asistencia "*" -- "1" Alumno : alumno
 Comportamiento "*" -- "1" Alumno : alumno
 Calificacion "*" -- "1" Alumno : alumno
 Calificacion "*" -- "1" Materia : materia
-Materia "*" -- "1" Docente : docente
 Calificacion "*" -- "*" Logro : logros
+
+DocenteMateria "0..*" -- "1" Docente : docente
+DocenteMateria "0..*" -- "1" Materia : materia
 @enduml

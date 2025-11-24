@@ -8,11 +8,12 @@
 <body>
 <div th:replace="plantillas/navbar :: navbar "> </div>
 <div th:replace="plantillas/mensajes :: mensajes"></div>
+
 <div class="container mt-5">
     <h2 th:text="${docente.id == 0} ? 'Registrar Nuevo Docente' : 'Editar Docente'">Registrar Nuevo Docente</h2>
 
     <form th:action="@{/docente/guardar}" th:object="${docente}" method="post" class="needs-validation" novalidate>
-        <input type="hidden" th:field="*{id}" /> <!-- importante para edición -->
+        <input type="hidden" th:field="*{id}" /> 
 
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
@@ -31,6 +32,19 @@
             <input type="email" id="email" th:field="*{email}" class="form-control" required>
             <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
         </div>
+
+        <div class="mb-3">
+            <label for="materias" class="form-label">Materias</label>
+
+            <select id="materias" name="materiasIds" class="form-select" multiple size="5">
+                <option th:each="materia : ${materias}"
+                        th:value="${materia.id}"
+                        th:text="${materia.nombre}">
+                </option>
+            </select>
+            <div class="form-text">Mantén presionada la tecla CTRL (Windows) o CMD (Mac) para seleccionar varias.</div>
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a th:href="@{/docente/lista}" class="btn btn-secondary">Cancelar</a>

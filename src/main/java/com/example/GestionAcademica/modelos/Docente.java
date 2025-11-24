@@ -1,5 +1,7 @@
 package com.example.GestionAcademica.modelos;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -29,14 +31,30 @@ public class Docente {
     @Column(name = "email", nullable = false, length = 100, unique = true)
     private String email;
 
-    // Constructor vacío (obligatorio para JPA)
+    @OneToMany(mappedBy = "docente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    List<DocenteMateria> docenteMateria;
+
+    public List<DocenteMateria> getDocenteMateria() {
+        return docenteMateria;
+    }
+
+    public void setDocenteMateria(List<DocenteMateria> docenteMateria) {
+        this.docenteMateria = docenteMateria;
+    }
+
     public Docente() {}
 
-    // Constructor con parámetros
-    public Docente(String nombre, String apellido, String email) {
+
+    public Docente(int id,
+            @NotBlank(message = "{docente.nombre.notblank}") @Size(min = 2, max = 50, message = "{docente.nombre.size}") @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{docente.nombre.pattern}") String nombre,
+            @NotBlank(message = "{docente.apellido.notblank}") @Size(min = 2, max = 50, message = "{docente.apellido.size}") @Pattern(regexp = "^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$", message = "{docente.apellido.pattern}") String apellido,
+            @NotBlank(message = "{docente.email.notblank}") @Email(message = "{docente.email.email}") @Size(max = 100, message = "{docente.email.size}") String email,
+            List<DocenteMateria> docenteMateria) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.docenteMateria = docenteMateria;
     }
 
     // Getters y Setters

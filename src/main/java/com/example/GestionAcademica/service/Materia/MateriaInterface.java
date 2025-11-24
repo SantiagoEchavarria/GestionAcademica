@@ -6,7 +6,7 @@ import com.example.GestionAcademica.modelos.Materia;
 
 public interface MateriaInterface {
     List<Materia> listarMaterias();
-    Materia obtenerMateriaPorId(int id);
+    Materia obtenerMateriaPorId(int materiaId);
     void guardarMateria(Materia materia);
     void actualizarMateria(int id, Materia materia);
     void eliminarMateria(int id);

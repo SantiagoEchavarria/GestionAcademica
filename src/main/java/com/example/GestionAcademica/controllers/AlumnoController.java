@@ -27,6 +27,7 @@ public class AlumnoController {
 
     private final AlumnoInterface alumnoServicio;
     private final GrupoInterface grupoServicio;
+    
     public AlumnoController(AlumnoInterface alumnoInterface, GrupoInterface grupoInterface) {
         this.grupoServicio = grupoInterface;
         this.alumnoServicio = alumnoInterface;

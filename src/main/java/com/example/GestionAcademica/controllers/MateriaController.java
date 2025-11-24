@@ -68,7 +68,7 @@ public class MateriaController {
 
     // Consultar gateria
     @GetMapping("/consultar/{id}")
-    public String consultarGateria(@PathVariable Long id, Model model) {
+    public String consultarGateria(@PathVariable int id, Model model) {
         Materia materia = materiaServicio.obtenerMateriaPorId(id);
         if (materia != null) {
             model.addAttribute("materia", materia);
@@ -79,7 +79,7 @@ public class MateriaController {
 
     // Editar gateria
     @GetMapping("/editar/{id}")
-    public String editarGateria(@PathVariable Long id, Model model) {
+    public String editarGateria(@PathVariable int id, Model model) {
         Materia materia = materiaServicio.obtenerMateriaPorId(id);
         if (materia != null) {
             model.addAttribute("materia", materia);
